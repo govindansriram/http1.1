@@ -8,6 +8,8 @@ import (
 const version = "HTTP/1.1"
 
 /*
+RFC 2616
+
 The Request-Line begins with a method token, followed by the
 Request-URI and the protocol version, and ending with CRLF. The
 elements are separated by SP characters. No CR or LF is allowed
@@ -17,8 +19,8 @@ except in the final CRLF sequence.
 */
 
 type RequestLine struct {
-	method string
-	uri    string
+	method []byte
+	uri    []byte
 }
 
 func InitRequestLine(reqLine []byte) (*RequestLine, error) {
@@ -44,7 +46,15 @@ func InitRequestLine(reqLine []byte) (*RequestLine, error) {
 	}
 
 	return &RequestLine{
-		method: string(lineValues[0]),
-		uri:    (string(lineValues[1])),
+		method: lineValues[0],
+		uri:    lineValues[1],
 	}, nil
+}
+
+func (r RequestLine) GetMethod() string {
+	return string(r.method)
+}
+
+func (r RequestLine) GetUri() string {
+	return string(r.uri)
 }

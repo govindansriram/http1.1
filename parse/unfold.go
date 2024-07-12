@@ -1,6 +1,8 @@
 package parse
 
 /*
+   RFC 2616
+
    HTTP/1.1 header field values can be folded onto multiple lines if the
    continuation line begins with a space or horizontal tab. All linear
    white space, including folding, has the same semantics as SP. A
